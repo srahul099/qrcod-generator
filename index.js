@@ -8,9 +8,26 @@ function genQR() {
     document.getElementById("url").style.border = "none";
     myimg.src = gapi + text + "&chld=7|1";
   }
-  document.getElementById("body").reset();
 }
+
 function resetForm() {
-  document.getElementById("url").value = ""; // Clear the input field
-  document.getElementById("myimg").src = ""; // Clear the QR code image
+  document.getElementById("url").value = "";
+  document.getElementById("myimg").src = "./default_img.png";
+}
+
+function downloadQR() {
+  var myimg = document.getElementById("myimg");
+  var imgSrc = myimg.src;
+
+  if (text === "") {
+    alert("No QR code generated yet.");
+    return;
+  }
+
+  var link = document.createElement("a");
+  link.href = imgSrc;
+  link.download = "QRCode.png";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
